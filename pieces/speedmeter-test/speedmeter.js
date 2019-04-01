@@ -90,6 +90,7 @@ class GaugeMeter{
     context.restore();
     context.translate(-centerX,-centerY);
   }
+
   clean(context){
     var centerX =   (this.w / this.meterSize) + this.meterOffsetX;
     var centerY =   (this.h / this.meterSize) + this.meterOffsetY;
@@ -99,8 +100,8 @@ class GaugeMeter{
     var x2 = centerX + radius;
     var y2 = centerY;
     context.clearRect(x1,y1,x2,y2);
-
   }
+
 }
 
 class PowerMeter extends GaugeMeter{
@@ -108,11 +109,16 @@ class PowerMeter extends GaugeMeter{
     super(width, height, mainColor, x , y);
     this.power = initialPower;
   }
-  powerOn(){
-    this.power += 0,1;
+  addPower(){
+    this.power += 1;
+    this.power = this.power > 180 ? 180 : this.power < 0 ? 0 : this.power;
   }
   powerOff(){
-    this.power -= 0,1;
+    this.power -= 1;
+    this.power = this.power > 180 ? 180 : this.power < 0 ? 0 : this.power;
+  }
+  getPower(){
+    return this.power;
   }
 }
 
@@ -123,9 +129,14 @@ class DirectionMeter extends GaugeMeter{
   }
   goLeft(){
     this.direction -= 1;
+    this.direction = this.direction > 180 ? 180 : this.direction < 0 ? 0 : this.direction;
   }
   goRight(){
     this.direction += 1;
+    this.direction = this.direction > 180 ? 180 : this.direction < 0 ? 0 : this.direction;
+  }
+  getDirection(){
+    return this.direction;
   }
 }
 

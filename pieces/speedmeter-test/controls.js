@@ -21,8 +21,12 @@ window.onload = function() {
 
 function gameProcess() {
   frameGame =  setInterval(() => {
-
-  }, 4000 / 60); 
+    controlsUpdate();
+    speedmeter.clean(context);
+    directionControl.clean(context);
+    directionControl.draw(context,directionControl.getDirection());
+    speedmeter.draw(context, speedmeter.getPower());
+  }, 1000 / 60); 
 }
 
 
@@ -47,9 +51,11 @@ document.getElementById("clean-speed-button").onclick = function() {
 
 
 function pressingDown(e) {
-  if (e.keyCode === 32) {
+  if (e.keyCode === 16) {
     powerOn = true;
   }
+
+  
   if (e.keyCode === 37) {
     arrowLeftOn = true;
   }
@@ -59,7 +65,7 @@ function pressingDown(e) {
 }
 
 function freeUp(e) {
-  if (e.keyCode === 32) {
+  if (e.keyCode === 16) {
     powerOn = false;
   }
   if (e.keyCode === 37) {
@@ -70,4 +76,10 @@ function freeUp(e) {
   }
 }
 
-
+function controlsUpdate(){
+  if (powerOn) {
+    speedmeter.addPower()
+  } else speedmeter.powerOff();
+  if (arrowLeftOn) {directionControl.goLeft()}
+  if (arrowRightOn) {directionControl.goRight()}
+}
