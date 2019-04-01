@@ -1,19 +1,16 @@
-class SpeedMeter{
+class GaugeMeter{
   constructor(width, height, mainColor, x , y){
     this.w = width;
     this.h = height;
-
     this.meterSize = 8;
     this.meterOffsetX = x;
     this.meterOffsetY = y;
-    //var colorMeter = '#ff9000';
     this.colorMeter = mainColor;
-    console.log(`${this.w}\n${this.h}\n`);
   }
 
 
-  draw(context ,speed){
-    speed = speed > 180 ? 180 : speed < 0 ? 0 : speed;
+  draw(context , valueToDraw ){
+    valueToDraw = valueToDraw > 180 ? 180 : valueToDraw < 0 ? 0 : valueToDraw;
     
 
     var centerX =   (this.w / this.meterSize) + this.meterOffsetX;
@@ -69,7 +66,7 @@ class SpeedMeter{
       context.closePath();
     }
 
-    var numOfSegments = speed/increment;
+    var numOfSegments = valueToDraw/increment;
     numOfSegments = numOfSegments -18;
     angle = Math.PI/30*numOfSegments;
     sineAngle = Math.sin(angle);
@@ -102,12 +99,33 @@ class SpeedMeter{
     var x2 = centerX + radius;
     var y2 = centerY;
     context.clearRect(x1,y1,x2,y2);
-  /*   context.beginPath();
-    context.fillStyle = "#0E8014"
-    context.rect(x1,y1,x2,y2)
-    context.fill();
-    context.closePath(); */
+
   }
 }
 
+class PowerMeter extends GaugeMeter{
+  constructor(width, height, mainColor, x , y, initialPower = 0 ){
+    super(width, height, mainColor, x , y);
+    this.power = initialPower;
+  }
+  powerOn(){
+    this.power += 0,1;
+  }
+  powerOff(){
+    this.power -= 0,1;
+  }
+}
+
+class DirectionMeter extends GaugeMeter{
+  constructor(width, height, mainColor, x , y, initialDirection = 90 ){
+    super(width, height, mainColor, x , y);
+    this.direction = initialDirection;
+  }
+  goLeft(){
+    this.direction -= 1;
+  }
+  goRight(){
+    this.direction += 1;
+  }
+}
 
