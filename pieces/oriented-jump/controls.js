@@ -29,8 +29,12 @@ document.getElementById("update-coords").onclick = function() {
   var initialPoint = jumpy.getCoords();
   jumpy.setModifyCoords(desplazamiento);
   var finalPoint = jumpy.getCoords();
-  jumpy.drawEllipse(context, initialPoint , finalPoint );
-  jumpy.draw(context);
+  var vectorBezier = jumpy.drawEllipse(context, initialPoint , finalPoint , directionGrades);
+  vectorBezier.forEach(element => {
+    jumpy.setCoords(+element.x, +element.y);
+    jumpy.draw(context);
+  });
+  
   
 };
 

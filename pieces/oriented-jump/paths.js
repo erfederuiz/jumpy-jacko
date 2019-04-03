@@ -37,8 +37,11 @@ class Path{
     return [difX,difY];
   }
 
+ 
 
-}
+
+
+} //class end
 
 
 // var radians = degrees * Math.PI/180
