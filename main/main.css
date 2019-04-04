@@ -1,0 +1,21 @@
+canvas {
+  outline: 1px solid silver;
+}
+
+
+.container
+{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 5px;
+     /* height: 100vh; */
+}
+
+
+
+.item
+{
+     border-radius: 1px;
+     margin-top: 10px;
+}

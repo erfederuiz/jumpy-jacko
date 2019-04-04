@@ -1,0 +1,31 @@
+canvas {
+  outline: 1px solid silver;
+}
+
+#game-board{
+/*   width: 50%;
+  height: 90vh; */
+  width: 800;
+  height: 600;
+}
+
+#controls-board{
+  width:40%;
+  height:20vh;
+}
+
+.container
+{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     /* height: 100vh; */
+}
+
+
+
+.item
+{
+     border-radius: 1px;
+     margin-top: 10px;
+}
