@@ -218,11 +218,24 @@ class Jumpy {
       return (pts);
     }
 
-    consumePath(){
+    consumePath(plataformas){
       if (this.pathJump.length > 0){
+        
         var consumeCoords = this.pathJump.shift();
-        this.posX = +consumeCoords.x;
-        this.posY = +consumeCoords.y;
+        var upperPlatforms = plataformas.getUpperPlatforms(+consumeCoords.y);
+        // Comprobar si el punto colisiona con alguna plataforma
+        //if (!plataformas.checkColllisionCirclePlatforms(plataformas.platforms, +consumeCoords.x, +consumeCoords.y, this.radius )){
+        if (!plataformas.checkCircleVsPlatforms(upperPlatforms, +consumeCoords.x, +consumeCoords.y, this.radius +1 )){
+          this.posX = +consumeCoords.x;
+          this.posY = +consumeCoords.y;
+        }else{
+            while (this.pathJump.length > 0) {
+              this.pathJump.shift();
+            }
+          }
+      }else{
+          // Si no quedan puntos llenar con x , y+1+radio hasta encontrar y que colisione con una plataforma
+
       }
 
     }
