@@ -46,7 +46,13 @@ function gameProcess() {
     directionControl.clean(contextControls);
     directionControl.draw(contextControls,directionControl.getDirection());
     speedmeter.draw(contextControls, speedmeter.getPower());
-    jumpy.consumePath(plataformas);
+    if(jumpy.pathJump.length > 0 ){
+      jumpy.consumePath(plataformas);
+    }
+    if(jumpy.pathDown.length > 0 ){
+      jumpy.consumePath(plataformas);
+    }
+    
     cleanCanvas(contextBoard, canvasBoard);
     plataformas.drawPlatforms(contextBoard,plataformas.getPlatforms());
     jumpy.draw(contextBoard);
@@ -100,6 +106,10 @@ function drawJump(){
   jumpy.setModifyCoords(desplazamiento);
   var finalPoint = jumpy.getCoords();
   jumpy.setPath(jumpy.getEllipse(contextBoard, initialPoint , finalPoint , directionGrades));
+  //  llenar el camino con la misma x , disminuyendo y
+  for (let newY = finalPoint[1]; newY < jumpy.canvasH; newY++) {
+    jumpy.pathJump.push({ x: `${finalPoint[0]}`, y: `${newY}` });     
+  } 
 }
 
 

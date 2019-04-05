@@ -66,12 +66,27 @@ class Platforms{
     })
   }
 
+
+  arrangeLowerPlatforms(lowerPlatforms){
+    lowerPlatforms.sort((a, b)=>{
+      //a.length === b.length ? a.localeCompare(b) : a.length - b.length;
+      //return b['posY'] - a['posY'] === 0 ? b['posY'] - a['posY'] : a['posX'] - b['posX'];
+      return a['posY'] - b['posY'] ;
+    })
+  }
+
   getUpperPlatforms(actualY){
     return this.platforms.filter(element => {
       var y = +element['posY'];
       return y < actualY;
-    })
-  
+    })  
+  }
+
+  getLowerPlatforms(actualY){
+    return this.platforms.filter(element => {
+      var y = +element['posY'];
+      return y > actualY;
+    })  
   }
 
   getPlatforms(){
