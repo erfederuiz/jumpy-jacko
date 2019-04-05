@@ -2,6 +2,9 @@ canvas {
   outline: 1px solid silver;
 }
 
+#canvas-controls{
+     outline: 1px solid transparent;
+}
 
 .container
 {
